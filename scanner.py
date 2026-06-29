@@ -1,52 +1,51 @@
 import socket
 import time
 
-target = input("Enter IP address or hostname: ")
+# Get target
+target = input("Enter Targat (Hostname/IP): ")
 
+# Resolve hostname
 try:
 	ip = socket.gethostbyname(target)
 except socket.gaierror:
 	print("Invalid hostname or IP address.")
 	exit()
 
-ports = [21,22,23,25,53,80,110,143,443]
+# Get port range
+start_port = int(input("Enter Start Port : "))
+end_port = int(input("Enter End Port : "))
 
-services = {
-21: "FTP",
-22: "SSH",
-23: "TELNET",
-25: "SMTP",
-53: "DNS",
-80: "HTTP",
-110: "POP3",
-143: "IMAP",
-443: "HTTPS"
-}
 
 print("\n===============================")
-print("  Netwrok Port Scanner  ")
+print(" Linux Netwrok Port Scanner  ")
 print("================================")
 print("Target	:", target)
 print("IP	:", ip)
+print("Range	:", start_port,"-",end_port)
 print()
+start_time = time.time()
 
-start = time.time()
+open_ports = []
 
-for port in ports:
+for port in range(start_port, end_port+1):
 	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	sock.settimeout(1)
+	sock.settimeout(0.5)
 
 	result = sock.connect_ex((ip, port))
 
-	status = "OPEN" if result == 0 else "CLOSED"
-	
-	print(f"{port:<5} {services[port]:<10} {status}")
+	if result == 0:
+		print("Port {} OPEN".format(port))
+		open_ports.append(port)
 	
 	sock.close()
 
-end = time.time()
+end_time = time.time()
 
-print("\nScan Completed in {:.2f} seconds".format(end - start))
+print("\n=================================")
+print("Scan Completed")
+print("==================================")
+print("Open Ports :", len(open_ports))
+print("\nTime Taken : {:.2f} seconds".format(end_time - start_time))
 
 
 

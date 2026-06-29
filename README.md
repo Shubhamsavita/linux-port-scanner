@@ -19,6 +19,11 @@ A Python-based TCP Port Scanner that scans common ports on a target host.
  - Improved output formatting
  - Better error handling
 
+### Version 3
+ - User-defined port range
+ - Displays total open ports
+ - Improved scan summary
+
 ## Technologies
  - Python3
  - Linux
