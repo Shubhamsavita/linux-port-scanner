@@ -12,6 +12,13 @@ A Python-based TCP Port Scanner that scans common ports on a target host.
  - Accept hostname or IP address
  - Simple command-line interface
 
+### Version 2
+ - Resolve hostname to IP address
+ - Display service names (HTTP, HTTPS, SSH, FTP, etc.)
+ - Show total scan time
+ - Improved output formatting
+ - Better error handling
+
 ## Technologies
  - Python3
  - Linux
